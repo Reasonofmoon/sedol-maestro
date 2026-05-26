@@ -1,0 +1,17 @@
+:: meta id=hello-baduck
+  title: Hello Baduck — 최소 예제 (L0)
+  version: 1.0.0
+  date: 2026-03-18
+  level: L0
+
+:: block id=blk:intro
+  ## 바둑코딩 시작하기
+
+  3가지만 기억하세요:
+
+  1. gdb scan ./src    — 판을 읽는다 (코드베이스 분석)
+  2. gdb think         — 수를 읽는다 (MCTS 탐색, 묘수 찾기)
+  3. gdb move <id>     — 수를 둔다 (기보에 기록)
+
+  승률(Win-Rate)이 올라가면 좋은 수입니다.
+  묘수(★)가 표시되면 그 수를 먼저 두세요.

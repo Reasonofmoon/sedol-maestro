@@ -1,0 +1,26 @@
+{
+  "name": "baduck-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn src/server.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.55.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "simple-git": "^3.25.0",
+    "tmp-promise": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.0"
+  }
+}

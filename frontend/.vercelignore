@@ -1,0 +1,6 @@
+app/
+packages/
+examples/
+*.ukdl
+board-state.json
+*.kifu.json

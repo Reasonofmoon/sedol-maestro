@@ -1,0 +1,196 @@
+:: meta id=payment-sprint-kifu
+  title: Payment System MVP Sprint — 기보
+  version: 1.0.0
+  date: 2026-03-18
+  level: L5
+  root-dir: ./src
+  total-moves: 9
+  win-rate: 85
+  myo-count: 1
+  tagline: AuthService 추출이 게임을 바꿨다
+
+:: block id=blk:game-summary
+  ## 게임 요약
+
+  9수 만에 Win-Rate 45% → 85% (+40%)
+  묘수 1개 발견: 수6 AuthService 추출 (+9%)
+
+  이 기보의 교훈:
+  단수에 몰린 인증 모듈을 살리는 것이 급선무처럼 보였지만,
+  실제 묘수는 God Object를 분리하는 것이었다.
+  이 수 하나로 이후 3수가 모두 선수가 되었다.
+
+:: entity id=ent:auth type=System
+  name: auth/auth.ts
+  health: -0.40
+  in-atari: true
+  board-pos: [3, 9]
+
+:: entity id=ent:auth-service type=System
+  name: auth/auth-service.ts (extracted)
+  health: 0.65
+  parent: @ent:auth
+  board-pos: [4, 9]
+
+:: quantum id=qst:project-risk
+  states:
+    critical: 0.05
+    high: 0.20
+    medium: 0.45
+    low: 0.30
+  observe-on: [move-completed]
+  entangle: @qst:project-velocity
+  description: 수6 묘수 이후 위험도 급락
+
+:: action id=act:move-01 type=fuseki
+  kind: refactor
+  intent: 초기 프로젝트 구조 설정
+  prior: 0.90
+  delta-health: +0.030
+  badge: ●포석
+  win-rate-before: 45
+  win-rate-after: 51
+  delta-win-rate: +6
+  board-pos: [3, 3]
+  timestamp: 2026-03-18T09:00:00Z
+
+:: action id=act:move-02 type=fuseki
+  kind: refactor
+  intent: 핵심 도메인 모델 정의
+  prior: 0.85
+  delta-health: +0.035
+  badge: ●포석
+  win-rate-before: 51
+  win-rate-after: 58
+  delta-win-rate: +7
+  board-pos: [9, 3]
+  timestamp: 2026-03-18T09:45:00Z
+
+:: action id=act:move-03 type=joseki
+  kind: refactor
+  intent: Repository 패턴 적용
+  prior: 0.75
+  delta-health: +0.025
+  badge: ○정석
+  win-rate-before: 58
+  win-rate-after: 63
+  delta-win-rate: +5
+  board-pos: [15, 3]
+  timestamp: 2026-03-18T10:30:00Z
+
+:: action id=act:move-04 type=sente
+  kind: add-test
+  intent: 인증 모듈 TDD 시작
+  prior: 0.70
+  delta-health: +0.010
+  badge: ○선수
+  win-rate-before: 63
+  win-rate-after: 65
+  delta-win-rate: +2
+  board-pos: [9, 9]
+  timestamp: 2026-03-18T11:15:00Z
+
+:: action id=act:move-05 type=gote
+  kind: fix-bug
+  intent: 긴급버그 — 세션 만료 수정
+  prior: 0.80
+  delta-health: -0.005
+  badge: △후수
+  win-rate-before: 65
+  win-rate-after: 64
+  delta-win-rate: -1
+  board-pos: [3, 15]
+  annotation: 급한 수였으나 구조적 개선 없음. 이런 수가 계속되면 Win-Rate가 하락한다.
+  timestamp: 2026-03-18T13:00:00Z
+
+:: action id=act:move-06 type=sente
+  kind: extract-module
+  intent: AuthService 추출 (God Object 분리)
+  prior: 0.42
+  q-value: 0.78
+  myo-score: 87
+  delta-health: +0.190
+  badge: ★묘수
+  myo-reasons: [Q/Prior=1.86 MCTS가 진가를 발견함, 연쇄 선수 3수 생성, 단수 2개 동시 해소]
+  win-rate-before: 64
+  win-rate-after: 73
+  delta-win-rate: +9
+  creates-sente: [@act:move-07, @act:move-08, @act:move-09]
+  mcts-visits: 34
+  board-pos: [4, 9]
+  annotation: |
+    이 수가 묘수인 이유:
+    처음 Prior는 0.42 (비직관적). MCTS 34회 탐색 후 Q=0.78로 급상승.
+    auth.ts의 God Object를 분리하는 것이 다음 3수를 모두 선수로 만들었다.
+    단순 버그 수정보다 구조적 개선이 훨씬 높은 Win-Rate를 가져온다.
+  timestamp: 2026-03-18T14:30:00Z
+
+:: action id=act:move-07 type=sente
+  kind: add-test
+  intent: AuthService 통합 테스트 추가
+  prior: 0.69
+  q-value: 0.71
+  delta-health: +0.120
+  badge: ○선수
+  win-rate-before: 73
+  win-rate-after: 78
+  delta-win-rate: +5
+  depends: @act:move-06
+  mcts-visits: 18
+  timestamp: 2026-03-18T15:30:00Z
+
+:: action id=act:move-08 type=sente
+  kind: extract-module
+  intent: UserService 추출
+  prior: 0.55
+  q-value: 0.65
+  delta-health: +0.090
+  badge: ○선수
+  win-rate-before: 78
+  win-rate-after: 82
+  delta-win-rate: +4
+  depends: @act:move-07
+  timestamp: 2026-03-18T16:15:00Z
+
+:: action id=act:move-09 type=sente
+  kind: refactor
+  intent: API Routes 정리
+  prior: 0.60
+  q-value: 0.61
+  delta-health: +0.075
+  badge: ○선수
+  win-rate-before: 82
+  win-rate-after: 85
+  delta-win-rate: +3
+  depends: @act:move-08
+  timestamp: 2026-03-18T17:00:00Z
+
+:: pipeline id=pipe:sprint-strategy
+  goal: Win-Rate 45% → 90%
+  iterations: 9
+  current: 9
+  phases:
+    foundation: [@act:move-01, @act:move-02]
+    pattern:    [@act:move-03]
+    initiative: [@act:move-04]
+    defense:    [@act:move-05]
+    myo:        [@act:move-06]
+    follow-through: [@act:move-07, @act:move-08, @act:move-09]
+  health-trajectory: [45, 51, 58, 63, 65, 64, 73, 78, 82, 85]
+  optimize-for: win-rate
+
+:: block id=blk:myo-analysis
+  ## 묘수(수6) 분석
+
+  **조건 1 충족**: Q(0.78) / Prior(0.42) = 1.86 > 1.5
+  → MCTS 34회 탐색 후 처음 예상보다 훨씬 가치가 높다고 판명
+
+  **조건 2 충족**: 연쇄 선수 3수
+  → 수7, 수8, 수9가 모두 선수 (각각 +4~5%)
+
+  **조건 3 충족**: 다중 위험 해소
+  → auth.ts 단수 해소 + user.controller.ts 의존성 단순화
+
+  **결론**: AuthService 추출은 단순 리팩토링이 아니었다.
+  God Object를 분리함으로써 이후 모든 수가 선수가 되는
+  전략적 요충지를 확보한 것이었다.

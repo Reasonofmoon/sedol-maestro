@@ -1,0 +1,30 @@
+node_modules/
+dist/
+*.js.map
+
+# Environment / Secrets
+.env
+.env.*
+.env.local
+.env*.local
+*.pem
+*.key
+*.secret
+
+# Project artifacts
+board-state.json
+*.kifu.json
+
+# IDE / OS
+.vercel
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/settings.json
+.serena/
+
+# Debug / Logs
+*.log
+npm-debug.log*

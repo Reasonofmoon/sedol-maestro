@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --myo-gold: #f59e0b;
+  --sente-cyan: #22d3ee;
+  --joseki-emerald: #10b981;
+  --atari-red: #ef4444;
+  --health-green: #22c55e;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 dark:bg-[#0d1117] dark:text-gray-100;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Board grid lines */
+.board-line { background: rgba(255,255,255,0.08); }
+
+/* Win-rate bar glow */
+.win-rate-bar-glow {
+  box-shadow: 0 0 12px currentColor;
+}
+
+/* Myo badge pulse */
+.myo-pulse {
+  animation: myoPulse 2s ease-in-out infinite;
+}
+
+@keyframes myoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+}
+
+/* Stone placement animation */
+@keyframes stonePlace {
+  0% { transform: scale(0.3); opacity: 0; }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.stone-enter { animation: stonePlace 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* Atari warning ring */
+@keyframes atariRing {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(239,68,68,0.6); }
+  50% { box-shadow: 0 0 0 4px rgba(239,68,68,0.9), 0 0 12px rgba(239,68,68,0.4); }
+}
+
+.atari-ring { animation: atariRing 1.5s ease-in-out infinite; }
+
+/* MCTS progress fill */
+@keyframes mctsProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.mcts-progress { animation: mctsProgress 3s ease-out forwards; }

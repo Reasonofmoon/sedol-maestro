@@ -1,0 +1,10 @@
+{
+  "name": "@baduck/kifu",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@baduck/encoder": "*",
+    "@baduck/mcts": "*",
+    "@baduck/ukdl-bridge": "*"
+  }
+}

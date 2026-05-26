@@ -1,0 +1,267 @@
+:: meta id=baduck-workbench-spec
+  title: Baduck Coding Workbench — Master Specification
+  version: 1.0.0
+  date: 2026-03-18
+  level: L5
+  authors: [developer, claude-opus-4-6]
+  tagline: 바둑처럼 두면 세계 최고 수준의 앱이 만들어진다
+  lang: ko
+  repo: https://github.com/Reasonofmoon/baduck-coding
+
+:: block id=blk:philosophy
+  ## 기획 철학
+
+  바둑의 본질은 전체 판세를 읽으며 각 수가 연결되는 묘수를 찾는 것이다.
+  AlphaGo Zero는 인간 기보 없이 자가 대국만으로 세계 최고가 되었다.
+
+  이 워크벤치의 세 가지 원칙:
+
+  1. **자기 대국 (Self-Play)**: 수를 두기 전에 MCTS로 48번 그 결과를 경험한다
+  2. **보상 신호 (Win-Rate)**: 실제 프로젝트 생존율만이 수의 가치를 결정한다
+  3. **전체 시각 (Global)**: 묘수는 항상 전체 코드베이스를 고려한 비직관적 수다
+
+:: block id=blk:metaphor-map
+  ## 바둑 ↔ 코딩 완전 대응
+
+  | 바둑           | 코딩                | 워크벤치 표현             |
+  |----------------|---------------------|---------------------------|
+  | 19×19 바둑판   | 아키텍처 지도        | 모듈 헬스 히트맵           |
+  | 흑돌/백돌      | 구현됨/테스트됨      | 모듈 건강 마커             |
+  | 집 (地)        | 신뢰 가능한 도메인   | 테스트 커버리지 영역        |
+  | 수 (着)        | 개발 액션            | DevAction (action 노드)   |
+  | 선수 (先手)    | 주도적 개선          | 확률 > 0.7                |
+  | 후수 (後手)    | 반응적 수정          | 확률 < 0.3                |
+  | 패 (劫)        | 기술 부채 사이클     | 순환 의존성               |
+  | 단수 (Atari)   | 위험 모듈            | 헬스 스코어 < -0.5         |
+  | 묘수 (妙手)    | 최적 다음 액션       | MCTS 베스트 패스           |
+  | 정석 (定石)    | 디자인 패턴          | 검증된 리팩토링 레시피      |
+  | 포석 (布石)    | 아키텍처 결정        | 기반 모듈 설계             |
+  | 승률 (勝率)    | 프로젝트 생존율      | 실시간 Win-Rate 미터       |
+  | 기보 (棋譜)    | 개발 히스토리        | UKDL 실행 가능 문서        |
+
+:: entity id=ent:encoder type=System
+  name: Board Encoder
+  source: packages/encoder
+  origin: gido-board
+  purpose: 코드베이스 스캔 → BoardState 생성
+  outputs: [dependency-graph, metrics, ownership-map, pagerank]
+
+:: entity id=ent:ukdl-bridge type=System
+  name: UKDL Bridge
+  source: packages/ukdl-bridge
+  purpose: BoardState ↔ UKDL 양방향 변환
+  outputs: [ukdl-document, quantum-states, context-nodes]
+
+:: entity id=ent:mcts type=System
+  name: MCTS Engine
+  source: packages/mcts
+  origin: gido-board
+  algorithm: AlphaGo-Zero
+  simulations: 48
+  depth: 3
+  outputs: [move-candidates, q-values, myo-detection]
+
+:: entity id=ent:probability type=System
+  name: Probability Calculator
+  source: packages/probability
+  purpose: 실시간 Win-Rate + PUCT 계산 + 묘수 감지
+  outputs: [win-rate, puct-scores, sente-chain, myo-badge]
+
+:: entity id=ent:kifu type=System
+  name: Kifu System
+  source: packages/kifu
+  purpose: 기보 기록 + 복기 + AI 주석 생성
+  outputs: [ukdl-kifu, replay, annotations]
+
+:: entity id=ent:cli type=System
+  name: CLI (gdb)
+  source: packages/cli
+  commands: [scan, think, move, rate, replay, annotate]
+
+:: entity id=ent:app type=System
+  name: Visual Workbench
+  source: app/
+  framework: React
+  components: [Board, WinRateMeter, MoveCandidates, MoveTree, KifuPanel, UKDLEditor]
+
+:: rel id=rel:encoder-to-bridge
+  from: @ent:encoder
+  to: @ent:ukdl-bridge
+  type: outputs
+  label: BoardState JSON
+
+:: rel id=rel:bridge-to-mcts
+  from: @ent:ukdl-bridge
+  to: @ent:mcts
+  type: feeds
+  label: UKDL quantum states + context
+
+:: rel id=rel:mcts-to-probability
+  from: @ent:mcts
+  to: @ent:probability
+  type: outputs
+  label: PUCT scores, Q values, visit counts
+
+:: rel id=rel:probability-to-app
+  from: @ent:probability
+  to: @ent:app
+  type: drives
+  label: Win-Rate, candidates, myo badge
+
+:: rel id=rel:mcts-to-kifu
+  from: @ent:mcts
+  to: @ent:kifu
+  type: records
+  label: move history, reflections
+
+:: schema id=sch:dev-action
+  fields:
+    id: string required
+    type: enum[fuseki, joseki, sente, gote, attack, defend] required
+    actionKind: enum[refactor, add-test, fix-bug, extract-module, reduce-complexity, remove-dead-code, add-error-handling, update-dependency] required
+    target: reference required
+    intent: string required
+    prior: float[0,1] required
+    qValue: float required
+    deltaHealth: float required
+    badge: enum[myo, sente, joseki, gote, mistake, blunder] optional
+    createsSente: array[reference] optional
+    mctsVisits: integer required
+    boardPos: array[string, string] optional
+
+:: schema id=sch:win-rate
+  fields:
+    value: integer[0,100] required
+    components:
+      healthScore: float[0,1] required
+      testCoverage: float[0,1] required
+      complexityInv: float[0,1] required
+      velocity: float[0,1] required
+      debtRatioInv: float[0,1] required
+    trend: enum[rising, stable, falling] required
+    deltaFromPrev: float required
+
+:: quantum id=qst:project-risk
+  states:
+    critical: 0.10
+    high: 0.30
+    medium: 0.40
+    low: 0.20
+  observe-on: [move-completed, test-added, refactor-done]
+  entangle: @qst:project-velocity
+  description: 전체 프로젝트 위험 수준 — 수를 둘 때마다 붕괴(관측)됨
+
+:: quantum id=qst:project-velocity
+  states:
+    accelerating: 0.40
+    stable: 0.45
+    decelerating: 0.15
+  observe-on: [move-completed, sprint-end]
+  entangle: @qst:project-risk
+  description: 개발 속도 — 위험도와 얽힘(entanglement)
+
+:: quantum id=qst:architecture-clarity
+  states:
+    clear: 0.35
+    evolving: 0.50
+    muddy: 0.15
+  observe-on: [refactor-done, pattern-applied]
+  description: 아키텍처 명확도 — 포석의 질을 반영
+
+:: action id=act:scan type=fuseki
+  kind: refactor
+  intent: gdb scan 실행 — 코드베이스 전체 분석
+  prior: 1.0
+  description: |
+    1. AST 파싱으로 모든 심볼 추출
+    2. 의존성 그래프 + PageRank 계산
+    3. 순환 의존성(패) 감지
+    4. 소유권 맵 + 건강도 계산
+    5. BoardState → UKDL 변환
+    6. Win-Rate 초기 계산
+
+:: action id=act:think type=sente
+  kind: refactor
+  intent: gdb think 실행 — MCTS 48회 탐색
+  prior: 1.0
+  depends: @act:scan
+  description: |
+    1. UKDL quantum 상태 읽기
+    2. 정책 네트워크: LLM + heuristic으로 후보수 생성
+    3. Dirichlet 노이즈 추가 (탐색 다양성)
+    4. MCTS 48회 시뮬레이션:
+       - Selection: PUCT 스코어로 노드 선택
+       - Expansion: 리프 노드에서 후보수 확장
+       - Evaluation: 피트니스 함수로 ΔHealth 계산
+       - Backpropagation: Q값 역전파
+    5. 묘수 감지: Q/Prior ratio + sente-chain + multi-risk
+    6. 확률 패널 업데이트
+
+:: action id=act:move type=sente
+  kind: refactor
+  intent: gdb move <action-id> 실행 — 수 확정
+  prior: 1.0
+  depends: @act:think
+  description: |
+    1. DevAction 실행 (또는 기록)
+    2. 기보 업데이트 (kifu.ukdl)
+    3. Win-Rate 재계산
+    4. 양자 상태 붕괴 (관측)
+    5. 다음 수 MCTS 자동 시작
+
+:: pipeline id=pipe:workbench-loop
+  goal: Win-Rate 100% 달성 (세계 최고 수준 코드베이스)
+  iterations: unlimited
+  phases:
+    scan:     [@act:scan]
+    think:    [@act:think]
+    move:     [@act:move]
+    record:   [kifu-update]
+    observe:  [quantum-collapse]
+    repeat:   [next-iteration]
+  optimize-for: win-rate
+  feedback: win-rate-delta
+  description: |
+    매 수마다 완전한 루프:
+    스캔 → 수읽기 → 묘수 선택 → 기보 기록 → 양자 관측 → 반복
+    이것이 바이브 코딩의 본질이다.
+
+:: context id=ctx:implementation priority=critical depth=detailed
+  summary: |
+    Baduck Coding Workbench는 세 프로젝트의 융합:
+    - UKDL: 모든 상태를 실행 가능한 문서로 인코딩
+    - GIDO-Board: AlphaGo Zero MCTS로 최선수 탐색
+    - NEW: Win-Rate 실시간 표시 + 묘수 감지 + 기보 시스템
+    결과: 바둑 AI처럼 매 수마다 승률이 보이는 코딩 환경
+  tokens: 800
+  phase: priority
+
+:: block id=blk:myo-algorithm
+  ## 묘수(妙手) 감지 알고리즘
+
+  묘수의 3조건:
+  1. Q > Prior × 1.5 — 처음에는 비직관적, MCTS 후 진가 발휘
+  2. 연쇄 선수 3수 — 이 수 이후 다음 3수가 모두 선수
+  3. 다중 위험 해소 — 단 하나의 수로 2개 이상 위험 모듈 해결
+
+  묘수 점수 = (Q / Prior ratio) × (sente-chain 길이) × (해소된 위험 수)
+
+  바둑의 묘수가 위대한 이유:
+  "보통 사람이 보기에 이상한 자리가 실은 판 전체를 살리는 수다"
+  코딩의 묘수도 같다:
+  "작은 리팩토링 하나가 이후 모든 기능 추가를 선수로 만든다"
+
+:: block id=blk:win-rate-formula
+  ## Win-Rate 계산식
+
+  Win-Rate = Σ (component × weight) × 100
+
+  components:
+  - healthScore    × 0.35  // 모듈 건강도 가중합 (PageRank 기반)
+  - testCoverage   × 0.25  // 테스트 커버리지
+  - complexityInv  × 0.20  // 복잡도 역수 (낮을수록 좋음)
+  - velocity       × 0.10  // 개발 속도 (최근 5수 평균 ΔHealth)
+  - debtRatioInv   × 0.10  // 기술 부채 역수
+
+  이것이 프로젝트의 "바둑 승률"이다.
+  수를 두기 전과 후를 비교하면 그 수의 가치가 보인다.
