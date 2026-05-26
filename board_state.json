@@ -1,0 +1,812 @@
+{
+  "stones": [
+    {
+      "x": 3,
+      "y": 18,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "eslint.config.js",
+      "path": "eslint.config.js"
+    },
+    {
+      "x": 6,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.html",
+      "path": "index.html"
+    },
+    {
+      "x": 14,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "package.json"
+    },
+    {
+      "x": 6,
+      "y": 12,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "postcss.config.js",
+      "path": "postcss.config.js"
+    },
+    {
+      "x": 18,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "railway.json",
+      "path": "railway.json"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "tailwind.config.js",
+      "path": "tailwind.config.js"
+    },
+    {
+      "x": 8,
+      "y": 13,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "tsconfig.app.json",
+      "path": "tsconfig.app.json"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "tsconfig.json",
+      "path": "tsconfig.json"
+    },
+    {
+      "x": 17,
+      "y": 16,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "tsconfig.node.json",
+      "path": "tsconfig.node.json"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "vercel.json",
+      "path": "vercel.json"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "vite.config.ts",
+      "path": "vite.config.ts"
+    },
+    {
+      "x": 14,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.html",
+      "path": "app/index.html"
+    },
+    {
+      "x": 1,
+      "y": 15,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "app/package.json"
+    },
+    {
+      "x": 0,
+      "y": 15,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "vite.config.ts",
+      "path": "app/vite.config.ts"
+    },
+    {
+      "x": 17,
+      "y": 17,
+      "health": 0.8,
+      "inAtari": false,
+      "label": "App.tsx",
+      "path": "app/src/App.tsx"
+    },
+    {
+      "x": 2,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.css",
+      "path": "app/src/index.css"
+    },
+    {
+      "x": 16,
+      "y": 11,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "main.tsx",
+      "path": "app/src/main.tsx"
+    },
+    {
+      "x": 16,
+      "y": 18,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "Board.tsx",
+      "path": "app/src/components/Board/Board.tsx"
+    },
+    {
+      "x": 16,
+      "y": 16,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "MoveCandidates.tsx",
+      "path": "app/src/components/Candidates/MoveCandidates.tsx"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "KifuPanel.tsx",
+      "path": "app/src/components/Kifu/KifuPanel.tsx"
+    },
+    {
+      "x": 18,
+      "y": 5,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "MoveTree.tsx",
+      "path": "app/src/components/MoveTree/MoveTree.tsx"
+    },
+    {
+      "x": 13,
+      "y": 18,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "WinRateMeter.tsx",
+      "path": "app/src/components/WinRate/WinRateMeter.tsx"
+    },
+    {
+      "x": 11,
+      "y": 16,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/cli/package.json"
+    },
+    {
+      "x": 7,
+      "y": 16,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "tsconfig.json",
+      "path": "packages/cli/tsconfig.json"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "colors.ts",
+      "path": "packages/cli/src/colors.ts"
+    },
+    {
+      "x": 12,
+      "y": 2,
+      "health": 0.8,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/cli/src/index.ts"
+    },
+    {
+      "x": 15,
+      "y": 4,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "analyze-renderer.ts",
+      "path": "packages/cli/src/cli/analyze-renderer.ts"
+    },
+    {
+      "x": 3,
+      "y": 10,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/cli/src/cli/index.ts"
+    },
+    {
+      "x": 18,
+      "y": 11,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "plan-renderer.ts",
+      "path": "packages/cli/src/cli/plan-renderer.ts"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "renderer.ts",
+      "path": "packages/cli/src/cli/renderer.ts"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "move.ts",
+      "path": "packages/cli/src/commands/move.ts"
+    },
+    {
+      "x": 17,
+      "y": 13,
+      "health": 0.65,
+      "inAtari": false,
+      "label": "rate.ts",
+      "path": "packages/cli/src/commands/rate.ts"
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "replay.ts",
+      "path": "packages/cli/src/commands/replay.ts"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "scan.ts",
+      "path": "packages/cli/src/commands/scan.ts"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "think.ts",
+      "path": "packages/cli/src/commands/think.ts"
+    },
+    {
+      "x": 16,
+      "y": 3,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "ast-parser.ts",
+      "path": "packages/cli/src/encoder/ast-parser.ts"
+    },
+    {
+      "x": 11,
+      "y": 13,
+      "health": 0.95,
+      "inAtari": false,
+      "label": "board-state.ts",
+      "path": "packages/cli/src/encoder/board-state.ts"
+    },
+    {
+      "x": 1,
+      "y": 15,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "dependency-graph.ts",
+      "path": "packages/cli/src/encoder/dependency-graph.ts"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "health": 0.7,
+      "inAtari": false,
+      "label": "metrics-collector.ts",
+      "path": "packages/cli/src/encoder/metrics-collector.ts"
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "ownership-map.ts",
+      "path": "packages/cli/src/encoder/ownership-map.ts"
+    },
+    {
+      "x": 9,
+      "y": 14,
+      "health": 0.9,
+      "inAtari": false,
+      "label": "types.ts",
+      "path": "packages/cli/src/encoder/types.ts"
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "health": 0.8,
+      "inAtari": false,
+      "label": "llm-provider.ts",
+      "path": "packages/cli/src/policy/llm-provider.ts"
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "health": 0.75,
+      "inAtari": false,
+      "label": "policy-engine.ts",
+      "path": "packages/cli/src/policy/policy-engine.ts"
+    },
+    {
+      "x": 5,
+      "y": 12,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "mcts-engine.ts",
+      "path": "packages/cli/src/search/mcts-engine.ts"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "mcts-node.ts",
+      "path": "packages/cli/src/search/mcts-node.ts"
+    },
+    {
+      "x": 15,
+      "y": 7,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "reflection.ts",
+      "path": "packages/cli/src/search/reflection.ts"
+    },
+    {
+      "x": 1,
+      "y": 11,
+      "health": 0.95,
+      "inAtari": false,
+      "label": "fitness-function.ts",
+      "path": "packages/cli/src/value/fitness-function.ts"
+    },
+    {
+      "x": 17,
+      "y": 5,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "move-evaluator.ts",
+      "path": "packages/cli/src/value/move-evaluator.ts"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/encoder/package.json"
+    },
+    {
+      "x": 18,
+      "y": 6,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "ast-parser.ts",
+      "path": "packages/encoder/src/ast-parser.ts"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "health": 0.95,
+      "inAtari": false,
+      "label": "board-state.ts",
+      "path": "packages/encoder/src/board-state.ts"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "dependency-graph.ts",
+      "path": "packages/encoder/src/dependency-graph.ts"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/encoder/src/index.ts"
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "health": 0.7,
+      "inAtari": false,
+      "label": "metrics-collector.ts",
+      "path": "packages/encoder/src/metrics-collector.ts"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "ownership-map.ts",
+      "path": "packages/encoder/src/ownership-map.ts"
+    },
+    {
+      "x": 7,
+      "y": 16,
+      "health": 0.9,
+      "inAtari": false,
+      "label": "types.ts",
+      "path": "packages/encoder/src/types.ts"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/kifu/package.json"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/kifu/src/index.ts"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "kifu-recorder.ts",
+      "path": "packages/kifu/src/kifu-recorder.ts"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/mcts/package.json"
+    },
+    {
+      "x": 10,
+      "y": 5,
+      "health": 0.95,
+      "inAtari": false,
+      "label": "fitness-function.ts",
+      "path": "packages/mcts/src/fitness-function.ts"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/mcts/src/index.ts"
+    },
+    {
+      "x": 14,
+      "y": 6,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "mcts-engine.ts",
+      "path": "packages/mcts/src/mcts-engine.ts"
+    },
+    {
+      "x": 14,
+      "y": 14,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "mcts-node.ts",
+      "path": "packages/mcts/src/mcts-node.ts"
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "myo-detector.ts",
+      "path": "packages/mcts/src/myo-detector.ts"
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "health": 0.75,
+      "inAtari": false,
+      "label": "policy-engine.ts",
+      "path": "packages/mcts/src/policy-engine.ts"
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/probability/package.json"
+    },
+    {
+      "x": 18,
+      "y": 8,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/probability/src/index.ts"
+    },
+    {
+      "x": 7,
+      "y": 12,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "move-ranker.ts",
+      "path": "packages/probability/src/move-ranker.ts"
+    },
+    {
+      "x": 18,
+      "y": 12,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "win-rate.ts",
+      "path": "packages/probability/src/win-rate.ts"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "package.json",
+      "path": "packages/ukdl-bridge/package.json"
+    },
+    {
+      "x": 7,
+      "y": 11,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "board-to-ukdl.ts",
+      "path": "packages/ukdl-bridge/src/board-to-ukdl.ts"
+    },
+    {
+      "x": 9,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.ts",
+      "path": "packages/ukdl-bridge/src/index.ts"
+    },
+    {
+      "x": 13,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "quantum-state.ts",
+      "path": "packages/ukdl-bridge/src/quantum-state.ts"
+    },
+    {
+      "x": 13,
+      "y": 11,
+      "health": 0.4,
+      "inAtari": true,
+      "label": "App.tsx",
+      "path": "src/App.tsx"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "index.css",
+      "path": "src/index.css"
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "main.tsx",
+      "path": "src/main.tsx"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "health": 0.85,
+      "inAtari": false,
+      "label": "client.ts",
+      "path": "src/api/client.ts"
+    },
+    {
+      "x": 12,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "Board.tsx",
+      "path": "src/components/Board/Board.tsx"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "MoveCandidates.tsx",
+      "path": "src/components/Candidates/MoveCandidates.tsx"
+    },
+    {
+      "x": 14,
+      "y": 8,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "PrayerBoard.tsx",
+      "path": "src/components/Gido/PrayerBoard.tsx"
+    },
+    {
+      "x": 15,
+      "y": 8,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "GlossaryPanel.tsx",
+      "path": "src/components/Glossary/GlossaryPanel.tsx"
+    },
+    {
+      "x": 18,
+      "y": 9,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "KifuPanel.tsx",
+      "path": "src/components/Kifu/KifuPanel.tsx"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "MoveTree.tsx",
+      "path": "src/components/MoveTree/MoveTree.tsx"
+    },
+    {
+      "x": 9,
+      "y": 18,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "Tutorial.tsx",
+      "path": "src/components/Tutorial/Tutorial.tsx"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "WinRateMeter.tsx",
+      "path": "src/components/WinRate/WinRateMeter.tsx"
+    },
+    {
+      "x": 3,
+      "y": 14,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "mandala.ts",
+      "path": "src/data/mandala.ts"
+    },
+    {
+      "x": 12,
+      "y": 4,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "ai-client.ts",
+      "path": "src/lib/ai-client.ts"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "health": 0.7,
+      "inAtari": false,
+      "label": "code-generator.ts",
+      "path": "src/lib/code-generator.ts"
+    },
+    {
+      "x": 15,
+      "y": 1,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "goNotation.ts",
+      "path": "src/lib/goNotation.ts"
+    },
+    {
+      "x": 9,
+      "y": 16,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "prompt-generator.ts",
+      "path": "src/lib/prompt-generator.ts"
+    },
+    {
+      "x": 7,
+      "y": 17,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "recommend.ts",
+      "path": "src/lib/recommend.ts"
+    },
+    {
+      "x": 0,
+      "y": 12,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "spec-engine.ts",
+      "path": "src/lib/spec-engine.ts"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "theme.tsx",
+      "path": "src/lib/theme.tsx"
+    },
+    {
+      "x": 0,
+      "y": 15,
+      "health": 0.9,
+      "inAtari": false,
+      "label": "webcontainer.ts",
+      "path": "src/lib/webcontainer.ts"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "GoalWizard.tsx",
+      "path": "src/pages/GoalWizard.tsx"
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "LandingPage.tsx",
+      "path": "src/pages/LandingPage.tsx"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "MatrixPage.tsx",
+      "path": "src/pages/MatrixPage.tsx"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "health": 1.0,
+      "inAtari": false,
+      "label": "RoadmapPage.tsx",
+      "path": "src/pages/RoadmapPage.tsx"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "health": 0.6,
+      "inAtari": false,
+      "label": "SpecPage.tsx",
+      "path": "src/pages/SpecPage.tsx"
+    }
+  ],
+  "analysis": {
+    "winRate": 69,
+    "totalFiles": 100,
+    "totalLines": 12912,
+    "avgHealth": 0.94,
+    "avgComplexity": 12.81,
+    "testCoverage": 2
+  }
+}
