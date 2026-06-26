@@ -8,7 +8,7 @@ services:
     runtime: node            # if Render rejects this key, use:  env: node
     plan: free               # free tier sleeps when idle (~50s cold start) — see DEPLOY_BACKEND.md
     rootDir: backend         # build/run inside the backend workspace only
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build   # --include=dev so tsc (a devDependency) is present even if NODE_ENV=production
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
