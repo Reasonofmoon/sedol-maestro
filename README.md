@@ -1,75 +1,193 @@
-# 🏆 Sedol Maestro (세돌 마에스트로)
-### 棋道(바둑의 길)와 祈禱(빌드의 간절함)를 융합한 AI-인간 협업 "한 수" 오케스트레이터
+# 棋 Sedol Maestro (세돌 마에스트로)
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![UiPath](https://img.shields.io/badge/UiPath-Maestro%20Case%20Track-orange.svg)](https://uipath.com)
-[![Framework](https://img.shields.io/badge/Framework-React%20%7C%20Express%20%7C%20TypeScript-teal.svg)](#)
+### An AI–Human collaborative coding governance platform — detect when a coding agent spirals, and let a human play the decisive *"78th move"* through UiPath orchestration.
 
-> **"이세돌 9단의 78수처럼, 전체 판세를 뒤흔들 '단 하나의 한 수'를 과학적으로 계산하여 에이전트를 자동 구출한다."**
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![UiPath](https://img.shields.io/badge/UiPath-Maestro%20Case%20(Track%201)-orange.svg)](https://uipath.com)
+[![Agent Type](https://img.shields.io/badge/Agent%20Type-Coded%20%2B%20Low--code-success.svg)](#-agent-type)
+[![Stack](https://img.shields.io/badge/Stack-React%20%7C%20Express%20%7C%20TypeScript%20%7C%20Python-teal.svg)](#-repository-structure)
 
-**Sedol Maestro**는 엔터프라이즈 레벨의 AI 코딩 협업 플랫폼으로, 3가지 독자적 자산(`app-factory`, `baduck-coding`, `gido-board`)을 하나로 융합하고 **UiPath Maestro Case (Track 1)** 오케스트레이션으로 인간과 에이전트 간의 동적 예외(Exception-heavy Workload)를 조율합니다.
+> Built for **UiPath AgentHack 2026** · **Track 1 — UiPath Maestro Case**
+> Demo video: **[▶ Watch the 5-min demo](#)** _(replace with public YouTube/Vimeo link before submission)_
 
 ---
 
-## 💡 Architecture & Synergy
+## 🎯 The Problem (Business Context)
+
+Modern AI coding agents (Claude Code, Cursor, Gemini CLI) write code fast — but on edge cases they **hallucinate and fall into catastrophic build loops**, retrying the *same* failing patch over and over. There is no enterprise-grade governance layer that:
+
+1. **Detects** the moment an agent loses its way — objectively, not by gut feel.
+2. **Pauses** the runaway process safely instead of burning compute and corrupting the codebase.
+3. **Escalates** the decision to a human and resumes only after an approved, high-leverage fix.
+
+For any organization running autonomous coding agents at scale, an unsupervised agent loop is a **direct cost, security, and reliability risk**. Sedol Maestro is the missing **Human-in-the-Loop control plane** for that risk.
+
+---
+
+## 💡 The Solution (What It Does)
+
+Sedol Maestro models the entire software-development process as **one game of Baduk (바둑 / Go)**. A codebase becomes a 19×19 board; each file is a stone; each refactor is a "move" with a calculated win-rate.
+
+The core innovation is treating agent runaway as a **measurable signal**:
 
 ```
-                                  [ Perception ]
-                                  (app-factory)
-                                        │
-                                        ▼  (board_state.json)
-                                  [ Strategy ]
-                                (baduck-coding UI)
-                                        │
-                                        ▼  (Decision Action)
-                           [ Orchestration & Exception ]
-                             (UiPath Maestro Case 1)
-                                        │
-                                        ▼  (Kifu & Post-Review)
-                                  [ Governance ]
-                                  (gido-board)
+H(X) = -Σ pᵢ · log₂(pᵢ)        # Shannon entropy of the MCTS candidate-move distribution
 ```
 
-1. **Perception (`app-factory`)**: 코드베이스의 복잡도와 구조적 스펙을 바둑의 "형세 분석판"으로 변환합니다.
-2. **Strategy (`baduck-coding` UI)**: 19x19 격자 UI 위에서 AI가 계산한 각 수(수정 프롬프트, 리팩토링 목표)의 승률 및 리스크를 확인하고 최적의 **'한 수'**를 선택합니다.
-3. **Orchestration (`UiPath Maestro Case`)**: 코딩 에이전트가 돌발 빌드 에러(사활/Atari)를 만났을 때, UiPath가 프로세스를 안전하게 멈추고 Action Center를 통해 인간에게 묘수를 요구(Human-in-the-Loop)하여 파이프라인을 복원합니다.
-4. **Governance (`gido-board`)**: 성공의 수순을 기보(SGF) 로그로 박제하고, 개발자들의 간절함이 담긴 **"빌드 성공 祈禱(기도)"** 게시판에 AI 에이전트가 격려와 기술적 오류 피드백을 다는 소셜 재미를 제공합니다.
+- **H ≈ 4.25 bits** → healthy exploration diversity.
+- **H < 1.2 bits** → the agent keeps proposing the same move → diversity has collapsed → we declare **"Atari (단수)"** and **suspend the process**.
+
+At Atari, control passes to **UiPath Maestro Case**, which publishes a **Human-in-the-Loop task to UiPath Action Center**. A human plays the decisive **"78th move" (묘수)** — inspired by Lee Sedol's legendary Move 78 vs. AlphaGo — the case resumes, tests re-run, and every decision is archived as a **Kifu (기보 / game record)**.
+
+---
+
+## 🏆 Challenge Track
+
+| | |
+|---|---|
+| **Track** | **Track 1 — UiPath Maestro Case** |
+| **Why** | The use case is a *dynamic, exception-heavy* process: an agent pipeline that must pause on unpredictable build failures, route to a human, and resume with full context — exactly what Maestro Case Management is built for. |
+
+---
+
+## 🤖 Agent Type
+
+**Both (Coded + Low-code).**
+
+| Layer | Agent type | Where |
+|---|---|---|
+| **Orchestration / governance** | **Low-code** | UiPath **Maestro Case** authored in **UiPath Studio Web** — drives the exception-handling state machine and Action Center HITL tasks. |
+| **Strategy / reasoning** | **Coded** | TypeScript MCTS search engine + Claude-powered move generator (`backend/`, `frontend/packages/mcts`, `frontend/packages/cli`). |
+
+---
+
+## 🧩 UiPath Components Used
+
+| Component | Role in Sedol Maestro |
+|---|---|
+| **UiPath Studio Web** | Authoring environment for the Maestro Case project and the orchestration agent. |
+| **UiPath Maestro (Case Management)** | Control plane. Receives the `Atari` signal from the backend, suspends the coding pipeline, and manages the long-running case instance across fast terminal states. |
+| **UiPath Action Center** | Human-in-the-Loop. Publishes the **"78th move" approval task** (App/Form task) to a human reviewer; the case resumes on submission. |
+| **UiPath Automation Cloud** | Hosts the tenant, Action Center, and OAuth 2.0 confidential app used for live dispatch. |
+| **OAuth 2.0 (Cloud app credentials)** | Authenticates REST dispatch from the backend bridge to Action Center. When credentials are absent, the system falls back to a built-in **simulator** so the demo never stalls. |
+
+> ⚠️ **Reviewer note:** The Maestro Case project and orchestration agent live in `/uipath` (see structure below). Live dispatch to Action Center activates when the `UIPATH_*` environment variables are set; otherwise the documented **simulator fallback** runs the identical flow locally.
+
+---
+
+## 🏗️ Architecture
+
+```
+        [ Perception ]                 maestro-bridge.py
+        (codebase scan)   ───────────▶ scans repo → board_state.json
+                                        (file metrics → 19×19 stones)
+                │
+                ▼
+        [ Strategy ]                   frontend/ (React Workbench)
+        (MCTS + Claude)  ───────────▶  candidate moves, win-rate,
+                │                       live Shannon-entropy telemetry
+                ▼
+        [ Orchestration ]              uipath/ (UiPath Maestro Case)
+        (Atari → suspend) ──────────▶  Action Center HITL task
+                │                       ("78th move" human approval)
+                ▼
+        [ Governance ]                 Kifu / SGF archive
+        (record + resume) ──────────▶  every decision logged as a game record
+```
+
+**Runtime backend:** Node.js / Express + `simple-git` clones and probes a target repo, runs the MCTS/Claude policy, and emits the `Atari` signal that drives the UiPath case.
 
 ---
 
 ## 📂 Repository Structure
 
-이 리포지토리는 단일 **npm Workspace Monorepo** 구조로 깔끔하게 설계되었습니다.
-
 ```bash
 sedol-maestro/
-├── package.json          # 모노레포 루트 의존성 및 스크립트
-├── uipath/               # UiPath Maestro Case 정의서 및 오케스트레이션 액티비티
-├── frontend/             # app-factory + baduck-coding + gido-board 통합 React 애플리케이션
-└── backend/              # Node/Express API 및 LLM 커넥터
+├── package.json          # npm workspaces monorepo root (frontend, backend)
+├── maestro-bridge.py     # Perception: scans a codebase → board_state.json (19×19 encoding)
+├── board_state.json      # Sample encoded board state (output of the bridge)
+├── backend/              # Express API · simple-git probes · Claude (Anthropic SDK) policy engine
+│   └── src/
+│       ├── server.ts         # REST API + Atari/suspend signaling
+│       ├── analyzer.ts       # AST / complexity / PageRank metrics
+│       ├── candidates.ts     # MCTS candidate distribution + entropy
+│       └── llm.ts            # Claude integration for 묘수 (move) generation
+├── frontend/             # React "Maestro Workbench" — Board UI, win-rate meters,
+│   │                     #   entropy telemetry, Kifu replayer, CLI packages
+│   └── packages/         # mcts · encoder · kifu · cli (coded agent internals)
+└── uipath/               # ⬅ UiPath Maestro Case project + orchestration agent
+                          #   (import into UiPath Studio Web — see setup §4)
+```
+
+> **Heads-up for contributors:** the `uipath/` directory holds the exported Maestro Case project. If you cloned before it was added, pull the latest `main`.
+
+---
+
+## 🛠️ Setup & Run
+
+### Prerequisites
+- **Node.js ≥ 20** and **npm ≥ 10**
+- **Python ≥ 3.10** (for the codebase scanner)
+- An **Anthropic API key** (`ANTHROPIC_API_KEY`)
+- *(Optional, for live UiPath dispatch)* a **UiPath Automation Cloud** tenant with an Action Center license and an OAuth 2.0 confidential app
+
+### 1. Install dependencies
+```bash
+npm install            # installs frontend + backend workspaces
+```
+
+### 2. Configure environment
+Create `backend/.env`:
+```bash
+# Required — LLM policy engine (move generation)
+ANTHROPIC_API_KEY=sk-ant-...
+
+# Optional — live UiPath Action Center dispatch.
+# If omitted, Sedol Maestro runs the built-in simulator fallback.
+UIPATH_CLIENT_ID=...
+UIPATH_CLIENT_SECRET=...
+UIPATH_ORG=...
+UIPATH_TENANT=...
+UIPATH_FOLDER=Shared
+```
+
+### 3. Run the platform (frontend + backend)
+```bash
+npm run dev:backend     # Express API  → http://localhost:3001
+npm run dev:frontend    # React UI     → http://localhost:5173
+```
+
+### 4. Set up the UiPath Maestro Case (orchestration)
+1. Sign in to **UiPath Automation Cloud** and open **Studio Web**.
+2. **Import** the Maestro Case project from `uipath/` (or open it directly in Studio Web).
+3. Publish the process and enable the **Action Center** App/Form task ("78th move" approval).
+4. Create an **OAuth 2.0 confidential app**, grant Orchestrator + Action Center scopes, and copy the client ID/secret into `backend/.env` (step 2).
+5. With credentials set, an `Atari` event now publishes a **real** HITL task to Action Center; without them, the simulator reproduces the identical flow.
+
+### 5. Scan any codebase into a board (optional, standalone)
+```bash
+python maestro-bridge.py /path/to/target/repo -o board_state.json
 ```
 
 ---
 
-## 🛠️ Quick Start (개발용)
+## 🎬 Demo Flow (what the video shows)
 
-### 1. 의존성 패키지 설치
-```bash
-npm install
-```
+1. A buggy Stripe-webhook server (`express.json()` destroys the raw-body Buffer → signature fails → DB deadlock).
+2. The agent loops; **entropy drops below 1.2 bits → Atari is declared → the case suspends.**
+3. UiPath Action Center surfaces the **"78th move"** approval; a human approves the `express.raw()` fix.
+4. The case **resumes**, tests go green, and the run is archived as an SGF **Kifu**.
 
-### 2. 로컬 개발 서버 실행
-```bash
-# 프론트엔드 및 백엔드 동시 실행 (향후 스크립트 튜닝 예정)
-npm run dev:frontend
-npm run dev:backend
-```
+> 📺 **Demo video (required for judging):** _add your public YouTube/Vimeo/Youku link here — must be < 5 min and in English (or English-subtitled)._
+> 🖥️ **Presentation deck:** _add your deck link here._
 
 ---
 
 ## 📄 License
-이 프로젝트는 **MIT License**에 따라 자유롭게 배포 및 수정이 가능합니다.
-궁금하신 점이 있거나 기여하고 싶으시다면 GitHub Issues를 열어주세요!
+
+Released under the **MIT License** — see [`LICENSE`](LICENSE). Open source and free to use, modify, and distribute.
 
 ---
-**Made with ❤️ for UiPath AgentHack 2026**
+
+**棋 Built with intuition + computation for UiPath AgentHack 2026.**
+*Every crisis becomes a game record; every brilliant move becomes an asset.*
