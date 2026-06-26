@@ -1,0 +1,74 @@
+### Sedol Maestro — UiPath Automation Cloud REST calls
+### Use with the VS Code "REST Client" extension or JetBrains HTTP client.
+### Fill the @variables (or load from env). Run requests top to bottom.
+
+@cloud        = https://cloud.uipath.com
+@org          = your-org-name
+@tenant       = DefaultTenant
+@clientId     = 00000000-0000-0000-0000-000000000000
+@clientSecret = replace-with-client-secret
+@folderId     = 123456
+@releaseKey   = 00000000-0000-0000-0000-000000000000
+@orchestrator = {{cloud}}/{{org}}/{{tenant}}/orchestrator_
+
+###############################################################################
+# 1) Get an OAuth 2.0 access token (client-credentials grant)
+#    Scopes must match the External Application: OR.Jobs OR.Folders OR.Execution OR.Tasks
+###############################################################################
+# @name auth
+POST {{cloud}}/identity_/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id={{clientId}}&client_secret={{clientSecret}}&scope=OR.Jobs OR.Folders OR.Execution OR.Tasks
+
+###############################################################################
+# 2) Start the "SedolMaestro.RescueCase" Maestro process
+#    Passes the Atari context as input arguments (mirrors backend uipath-client.ts).
+###############################################################################
+# @name startJob
+POST {{orchestrator}}/odata/Jobs/UiPath.Server.Configuration.OData.StartJobs
+Authorization: Bearer {{auth.response.body.access_token}}
+Content-Type: application/json
+X-UIPATH-OrganizationUnitId: {{folderId}}
+
+{
+  "startInfo": {
+    "ReleaseKey": "{{releaseKey}}",
+    "Strategy": "ModernJobsCount",
+    "JobsCount": 1,
+    "InputArguments": "{\"caseId\":\"CASE-DEMO01\",\"repoUrl\":\"https://github.com/Reasonofmoon/sedol-maestro\",\"targetFile\":\"server.ts\",\"diff\":\"- app.use(express.json());\\n+ app.post('/webhook', express.raw({ type: 'application/json' }), ...)\",\"winRate\":12,\"entropy\":0.58,\"atariReason\":\"Identical patch retried 4x; candidate diversity collapsed (H<1.2).\"}"
+  }
+}
+
+###############################################################################
+# 3) List pending Action Center tasks (find the "Approve the 78th Move" task)
+###############################################################################
+# @name listTasks
+GET {{orchestrator}}/odata/Tasks?$filter=Status eq 'Pending'&$top=20
+Authorization: Bearer {{auth.response.body.access_token}}
+X-UIPATH-OrganizationUnitId: {{folderId}}
+
+###############################################################################
+# 4) (Reference) The backend endpoints the Maestro Service Tasks call.
+#    These run against your Express backend, not Orchestrator.
+###############################################################################
+# 4a) Trigger from backend side (what POST /atari does internally):
+# @name atari
+POST {{cloud}}/dummy-not-used
+# ^ placeholder — real trigger is the backend itself:
+#   POST http://localhost:3001/atari
+#   Body: { repoUrl, targetFile, diff, winRate, entropy, atariReason }
+
+###############################################################################
+# 5) Maestro "ApplyVerdict" Service Task → backend callback (after human approves)
+###############################################################################
+# @name callback
+POST http://localhost:3001/maestro/callback
+Content-Type: application/json
+
+{
+  "caseId": "CASE-DEMO01",
+  "taskId": "1234",
+  "approved": true,
+  "decisionNote": "Approved express.raw patch — restores raw-body buffer for Stripe signature."
+}
