@@ -1,0 +1,22 @@
+# Render Blueprint — deploys the Sedol Maestro analysis backend (Express + Claude).
+# Deploy: https://render.com → New → Blueprint → connect this repo → set ANTHROPIC_API_KEY.
+# The backend is an npm workspace with its own package.json (build: tsc, start: node dist/server.js).
+
+services:
+  - type: web
+    name: sedol-maestro-backend
+    runtime: node            # if Render rejects this key, use:  env: node
+    plan: free               # free tier sleeps when idle (~50s cold start) — see DEPLOY_BACKEND.md
+    rootDir: backend         # build/run inside the backend workspace only
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: ANTHROPIC_API_KEY
+        sync: false          # you enter this secret in the Render dashboard (not stored in git)
+      # Optional — lock CORS to your frontend origin (backend defaults to "*" if unset):
+      # - key: FRONTEND_URL
+      #   value: https://baduck-coding.vercel.app
