@@ -1,0 +1,63 @@
+{
+  "$schema": "https://sedol-maestro.dev/schemas/action-center-task.v1.json",
+  "_note": "Logical schema for the Action Center User Task 'Approve the 78th Move'. Recreate these fields in the UiPath Studio Web form/app designer. The input/output argument contract below must match the Maestro User Task and the backend payloads (see uipath/README.md §2-§3).",
+  "taskTitle": "Sedol Maestro — Approve the 78th Move (묘수)",
+  "taskType": "FormTask",
+  "priority": "High",
+  "slaMinutes": 30,
+  "onTimeout": "auto-reject",
+
+  "inputArguments": [
+    { "name": "caseId",      "type": "String", "example": "CASE-LX9F2A" },
+    { "name": "targetFile",  "type": "String", "example": "server.ts" },
+    { "name": "winRate",     "type": "Int32",  "example": 12 },
+    { "name": "entropy",     "type": "Double", "example": 0.58 },
+    { "name": "atariReason", "type": "String", "example": "Identical patch retried 4x; candidate diversity collapsed (H<1.2)." },
+    { "name": "diff",        "type": "String", "example": "- app.use(express.json());\n+ app.post('/webhook', express.raw({ type: 'application/json' }), ...)" }
+  ],
+
+  "outputArguments": [
+    { "name": "approved",     "type": "Boolean", "required": true },
+    { "name": "decisionNote", "type": "String",  "required": false }
+  ],
+
+  "layout": {
+    "title": "Approve the 78th Move",
+    "subtitle": "An agent is in Atari (단수). Review the proposed recovery move and decide.",
+    "sections": [
+      {
+        "heading": "Situation",
+        "fields": [
+          { "label": "Case ID",         "bind": "caseId",      "component": "text",     "readOnly": true },
+          { "label": "File in Atari",    "bind": "targetFile",  "component": "text",     "readOnly": true },
+          { "label": "MCTS Win-Rate",    "bind": "winRate",     "component": "metric",   "suffix": "%", "readOnly": true,
+            "color": { "ranges": [ { "max": 30, "tone": "danger" }, { "max": 70, "tone": "warning" }, { "tone": "success" } ] } },
+          { "label": "Shannon Entropy",  "bind": "entropy",     "component": "metric",   "suffix": " bits", "readOnly": true,
+            "highlightWhen": "value < 1.2", "highlightTone": "danger" },
+          { "label": "Why the agent is stuck", "bind": "atariReason", "component": "textarea", "rows": 2, "readOnly": true }
+        ]
+      },
+      {
+        "heading": "Proposed patch (the 78th move)",
+        "fields": [
+          { "label": "Diff", "bind": "diff", "component": "code", "language": "diff", "readOnly": true }
+        ]
+      },
+      {
+        "heading": "Your decision",
+        "fields": [
+          { "label": "Decision", "bind": "approved", "component": "radio", "required": true,
+            "options": [
+              { "value": true,  "label": "Approve 묘수 — apply the express.raw patch and resume" },
+              { "value": false, "label": "Reject — send back to the agent" }
+            ] },
+          { "label": "Reviewer note", "bind": "decisionNote", "component": "textarea", "rows": 3, "required": false,
+            "placeholder": "Optional: rationale, follow-up, or constraints for the agent." }
+        ]
+      }
+    ],
+    "actions": [
+      { "label": "Submit decision", "type": "submit", "style": "primary" }
+    ]
+  }
+}
