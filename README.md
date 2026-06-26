@@ -8,7 +8,7 @@
 [![Stack](https://img.shields.io/badge/Stack-React%20%7C%20Express%20%7C%20TypeScript%20%7C%20Python-teal.svg)](#-repository-structure)
 
 > Built for **UiPath AgentHack 2026** · **Track 1 — UiPath Maestro Case**
-> Demo video: **[▶ Watch the 5-min demo](#)** _(replace with public YouTube/Vimeo link before submission)_
+> Demo video: **[▶ Watch the 5-min demo](https://youtu.be/APSKfS4Sdq8)**
 
 ---
 
@@ -178,7 +178,7 @@ python maestro-bridge.py /path/to/target/repo -o board_state.json
 3. UiPath Action Center surfaces the **"78th move"** approval; a human approves the `express.raw()` fix.
 4. The case **resumes**, tests go green, and the run is archived as an SGF **Kifu**.
 
-> 📺 **Demo video (required for judging):** _add your public YouTube/Vimeo/Youku link here — must be < 5 min and in English (or English-subtitled)._
+> 📺 **Demo video (required for judging):** https://youtu.be/APSKfS4Sdq8
 > 🖥️ **Presentation deck:** _add your deck link here._
 
 ---
